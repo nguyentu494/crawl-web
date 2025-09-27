@@ -109,7 +109,8 @@ def get_data_from_url(url, max_pages=None, delay=1, progress=None, status=None):
 
     # Tính tổng số trang nếu có thể
     while True:
-        crawl_url = f"{url}?page={page}"
+        crawl_url = f"{url}"
+        print(crawl_url)
         data = crawl_page(
             crawl_url,
             headers,
@@ -122,9 +123,7 @@ def get_data_from_url(url, max_pages=None, delay=1, progress=None, status=None):
             break
         all_data.extend(data)
 
-        if max_pages and page >= max_pages:
-            break
-        page += 1
+        break;
     return all_data
 
 def get_data_from_province(slug, pid, max_pages=None, delay=1, progress=None):
@@ -154,7 +153,7 @@ def get_data_from_province(slug, pid, max_pages=None, delay=1, progress=None):
 st.title("🕷️ Cào dữ liệu doanh nghiệp từ masothue.com")
 
 mode = st.radio("Chọn cách crawl:", ["Theo URL", "Theo khu vực"])
-max_pages = st.number_input("Số trang tối đa (0 = crawl hết)", min_value=0, value=1, step=1)
+max_pages = 0
 
 url = None
 province = None
